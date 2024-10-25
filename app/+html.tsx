@@ -1,38 +1,38 @@
 import { ScrollViewStyleReset } from 'expo-router/html';
 
-// This file is web-only and used to configure the root HTML for every
-// web page during static rendering.
-// The contents of this function only run in Node.js environments and
-// do not have access to the DOM or browser APIs.
+// Este arquivo é somente para web e usado para configurar o HTML raiz para cada
+// página da web durante a renderização estática.
+// O conteúdo desta função só é executado em ambientes Node.js e
+// não tem acesso ao DOM ou APIs do navegador.
 export default function Root({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    return (
+        <html lang="en">
+            <head>
+                <meta charSet="utf-8" />
+                <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
-        {/* 
-          This viewport disables scaling which makes the mobile website act more like a native app.
-          However this does reduce built-in accessibility. If you want to enable scaling, use this instead:
-            <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-        */}
-        <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1.00001,viewport-fit=cover"
-        />
-        {/* 
-          Disable body scrolling on web. This makes ScrollView components work closer to how they do on native. 
-          However, body scrolling is often nice to have for mobile web. If you want to enable it, remove this line.
-        */}
-        <ScrollViewStyleReset />
+                {/*
+                    Esta viewport desabilita o dimensionamento, o que faz com que o site móvel aja mais como um aplicativo nativo.
+                    No entanto, isso reduz a acessibilidade integrada. Se você quiser habilitar o dimensionamento, use isto:
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+                */}
+                <meta
+                    name="viewport"
+                    content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1.00001,viewport-fit=cover"
+                />
+                {/*
+                    Desabilite a rolagem do corpo na web. Isso faz com que os componentes ScrollView funcionem mais próximos de como funcionam no nativo.
+                    No entanto, a rolagem do corpo geralmente é boa para a web móvel. Se você quiser habilitá-la, remova esta linha.
+                */}
+                <ScrollViewStyleReset />
 
-        {/* Using raw CSS styles as an escape-hatch to ensure the background color never flickers in dark-mode. */}
-        <style dangerouslySetInnerHTML={{ __html: responsiveBackground }} />
-        {/* Add any additional <head> elements that you want globally available on web... */}
-      </head>
-      <body>{children}</body>
-    </html>
-  );
+                {/* Usando estilos CSS brutos como uma saída de emergência para garantir que a cor de fundo nunca pisque no modo escuro. */}
+                <style dangerouslySetInnerHTML={{ __html: responsiveBackground }} />
+                {/* Adicione quaisquer elementos <head> adicionais que você deseja disponibilizar globalmente na web... */}
+            </head>
+            <body>{children}</body>
+        </html>
+    );
 }
 
 const responsiveBackground = `
