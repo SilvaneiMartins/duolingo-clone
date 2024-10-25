@@ -1,39 +1,39 @@
 {
-  "cesVersion": "2.11.24",
-  "projectName": "duolingo-clone",
-  "packages": [
-    {
-      "name": "expo-router",
-      "type": "navigation",
-      "options": {
-        "type": "tabs"
-      }
+    "cesVersion": "2.11.24",
+    "projectName": "duolingo-clone",
+    "packages": [
+        {
+            "name": "expo-router",
+            "type": "navigation",
+            "options": {
+                "type": "tabs"
+            }
+        },
+        {
+            "name": "stylesheet",
+            "type": "styling"
+        },
+        {
+            "name": "supabase",
+            "type": "authentication"
+        }
+    ],
+    "flags": {
+        "noGit": false,
+        "noInstall": false,
+        "overwrite": false,
+        "importAlias": true,
+        "packageManager": "npm",
+        "eas": true
     },
-    {
-      "name": "stylesheet",
-      "type": "styling"
+    "packageManager": {
+        "type": "npm",
+        "version": "10.5.2"
     },
-    {
-      "name": "supabase",
-      "type": "authentication"
+    "os": {
+        "type": "Darwin",
+        "platform": "darwin",
+        "arch": "arm64",
+        "kernelVersion": "24.1.0"
     }
-  ],
-  "flags": {
-    "noGit": false,
-    "noInstall": false,
-    "overwrite": false,
-    "importAlias": true,
-    "packageManager": "npm",
-    "eas": true
-  },
-  "packageManager": {
-    "type": "npm",
-    "version": "10.5.2"
-  },
-  "os": {
-    "type": "Darwin",
-    "platform": "darwin",
-    "arch": "arm64",
-    "kernelVersion": "24.1.0"
-  }
 }
