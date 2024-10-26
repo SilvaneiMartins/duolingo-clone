@@ -9,10 +9,17 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import React from 'react';
+import { useRouter } from 'expo-router';
 
 import { assets } from '~/assets';
 
 export const HomeScreen = () => {
+    const router = useRouter();
+
+    const onLessonPress = () => {
+        router.navigate('/common/home/ListeningScreen');
+    };
+
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.header}>
@@ -36,14 +43,23 @@ export const HomeScreen = () => {
             </View>
 
             <View style={styles.mainContent}>
-                <TouchableOpacity style={styles.circleButton}>
+                <TouchableOpacity
+                    style={[styles.circleButton, styles.startButton]}
+                    onPress={onLessonPress}
+                >
                     <Image
                         source={assets.image.start}
                         style={[styles.icon]}
                     />
                 </TouchableOpacity>
 
-                <View style={styles.lockedButtonContainer}>
+                <View style={[
+                    styles.lockedButtonContainer,
+                    {
+                        position: 'relative',
+                        left: -40,
+                    }
+                ]}>
                     <Image
                         source={assets.image.lock}
                         style={[styles.icon, { tintColor: '#CCCCCC' }]}
@@ -51,7 +67,13 @@ export const HomeScreen = () => {
                 </View>
 
                 <Pressable
-                    style={styles.lockedPressableContainer}
+                    style={[
+                        styles.lockedPressableContainer,
+                        {
+                            position: 'relative',
+                            left: -80,
+                        }
+                    ]}
                     onPress={() => Alert.alert("Abrir Bau", "Abrir Bau de prêmios!")}
                 >
                     <Image
@@ -59,14 +81,26 @@ export const HomeScreen = () => {
                     />
                 </Pressable>
 
-                <View style={styles.lockedButtonContainer}>
+                <View style={[
+                    styles.lockedButtonContainer,
+                    {
+                        position: 'relative',
+                        left: -30,
+                    }
+                ]}>
                     <Image
                         source={assets.image.book}
                         style={[styles.icon, { tintColor: '#CCCCCC' }]}
                     />
                 </View>
 
-                <View style={styles.lockedButtonContainer}>
+                <View style={[
+                    styles.lockedButtonContainer,
+                    {
+                        position: 'relative',
+                        left: 40,
+                    }
+                ]}>
                     <Image
                         source={assets.image.trofeu}
                         style={[styles.icon, { tintColor: '#CCCCCC' }]}
@@ -122,13 +156,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     circleButton: {
+        borderRadius: 50,
+        marginBottom: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#f0f0f0',
+    },
+    startButton: {
         width: 100,
         height: 100,
-        borderRadius: 50,
         backgroundColor: '#58CC02',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 20,
+    },
+    lockedButtonSmall: {
+        width: 60,
+        height: 60,
+    },
+    lockedButtonMedium: {
+        width: 80,
+        height: 80,
+    },
+    lockedButtonLarge: {
+        width: 90,
+        height: 90,
     },
     startText: {
         color: '#fff',
@@ -139,10 +188,10 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 50,
-        backgroundColor: '#f0f0f0',
-        justifyContent: 'center',
-        alignItems: 'center',
         marginBottom: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#f0f0f0',
     },
     lockedPressableContainer: {
         width: 100,
@@ -158,9 +207,9 @@ const styles = StyleSheet.create({
         tintColor: '#FFFFFF',
     },
     owlContent: {
-        position: 'absolute',
-        bottom: 150,
         right: 0,
+        bottom: 180,
+        position: 'absolute',
     },
     owlIcon: {
         width: 200,

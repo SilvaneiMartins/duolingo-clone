@@ -2,7 +2,7 @@ import React from 'react';
 import { Stack } from 'expo-router';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { HomeScreen } from '~/features/Home';
+import { HomeScreen } from '~/app/common/home';
 
 export default function Home() {
     return (
