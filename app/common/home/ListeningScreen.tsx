@@ -6,13 +6,24 @@ import {
     SafeAreaView,
     TouchableOpacity,
 } from 'react-native';
-import React from 'react';
-import { Stack } from 'expo-router';
+import React, { useState } from 'react';
+import { Stack, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useHeaderHeight } from "@react-navigation/elements";
 
 const ListeningScreen: React.FC = () => {
+    const router = useRouter();
     const headerHeight = useHeaderHeight();
+
+    const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+    const correctAnswer = 'Gato';
+
+    const handleOptionSelect = (option: string) => {
+        setSelectedOption(option);
+    };
+
+    const isCorrectSelected = selectedOption === correctAnswer;
 
     return (
         <SafeAreaView style={[styles.container, { paddingTop: headerHeight + 30 }]}>
@@ -20,7 +31,10 @@ const ListeningScreen: React.FC = () => {
             <Stack.Screen options={{ headerShown: false }} />
 
             <View style={styles.header}>
-                <TouchableOpacity style={styles.closeButton}>
+                <TouchableOpacity
+                    style={styles.closeButton}
+                    onPress={() => router.back()}
+                >
                     <Ionicons name="close" size={24} color="black" />
                 </TouchableOpacity>
                 <View style={styles.progressBar} />
@@ -34,25 +48,28 @@ const ListeningScreen: React.FC = () => {
             </TouchableOpacity>
 
             <View style={styles.optionsContainer}>
-                <TouchableOpacity style={styles.optionButton}>
-                    <Text style={styles.optionText}>Gato</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.optionButton}>
-                    <Text style={styles.optionText}>Chato</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.optionButton}>
-                    <Text style={styles.optionText}>Pato</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.optionButton}>
-                    <Text style={styles.optionText}>Nato</Text>
-                </TouchableOpacity>
+                {['Gato', 'Chat', 'Pato', 'Nada'].map((option) => (
+                    <TouchableOpacity
+                        key={option}
+                        style={[
+                            styles.optionButton,
+                            selectedOption === option && styles.selectedOption,
+                        ]}
+                        onPress={() => handleOptionSelect(option)}
+                    >
+                        <Text style={styles.optionText}>{option}</Text>
+                    </TouchableOpacity>
+                ))}
             </View>
 
             <View style={styles.bottomButtons}>
                 <TouchableOpacity style={styles.listenButton}>
                     <Text style={styles.listenText}>NÃO POSSO OUVIR AGORA</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.checkButton}>
+                <TouchableOpacity
+                    style={[styles.checkButton, isCorrectSelected ? styles.checkButtonActive : styles.checkButtonDisabled]}
+                    disabled={!isCorrectSelected}
+                >
                     <Text style={styles.checkText}>VERIFICAR</Text>
                 </TouchableOpacity>
             </View>
@@ -164,6 +181,16 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#fff',
         fontWeight: 'bold',
+    },
+    checkButtonActive: {
+        backgroundColor: '#32CD32',
+    },
+    checkButtonDisabled: {
+        backgroundColor: '#D3D3D3',
+    },
+    selectedOption: {
+        borderColor: '#1E90FF',
+        borderWidth: 2,
     },
 });
 
