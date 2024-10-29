@@ -25,6 +25,10 @@ const ListeningScreen: React.FC = () => {
 
     const isCorrectSelected = selectedOption === correctAnswer;
 
+    const onLessonQuestions = () => {
+        router.navigate('/common/home/SequenceQuestions');
+    };
+
     return (
         <SafeAreaView style={[styles.container, { paddingTop: headerHeight + 30 }]}>
 
@@ -67,8 +71,12 @@ const ListeningScreen: React.FC = () => {
                     <Text style={styles.listenText}>NÃO POSSO OUVIR AGORA</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={[styles.checkButton, isCorrectSelected ? styles.checkButtonActive : styles.checkButtonDisabled]}
+                    style={[
+                        styles.checkButton,
+                        isCorrectSelected ? styles.checkButtonActive : styles.checkButtonDisabled
+                    ]}
                     disabled={!isCorrectSelected}
+                    onPress={onLessonQuestions}
                 >
                     <Text style={styles.checkText}>VERIFICAR</Text>
                 </TouchableOpacity>
